@@ -1,5 +1,3 @@
-package Java.Chap4;
-
 class PostfixBuild {
     private String input;
     private String output;
@@ -25,6 +23,10 @@ class PostfixBuild {
     public boolean isOpp(char c) {
         return ((c >= 'a' || c >= 'A') && (c <= 'Z' || c <= 'z'));
     }
+    
+    public boolean isDigit(char c) {
+        return (c >= '0' && c <= '9');
+    }
 
     public boolean isBrack(char c) {
         return (c == '(' || c == ')');
@@ -33,7 +35,7 @@ class PostfixBuild {
     public PostfixBuild builder() {
         for (int i = 0; i < length; i++) {
             char c = input.charAt(i);
-            if (isOpp(c)) {
+            if (isOpp(c) || isDigit(c)) {
                 output += c;
             } else {
                 if (!isBrack(c)) {
@@ -44,8 +46,8 @@ class PostfixBuild {
                     } else {
                         int p1 = getPric(c);
                         int p2 = getPric(stack.peek());
-                        if (p2 <= p1) {
-                            while (p2 <= p1) {
+                        if (p2 >= p1) {
+                            while (p2 >= p1) {
                                 char t = stack.pop();
                                 if (t != '(')
                                     output += t;
@@ -85,28 +87,40 @@ class PostfixBuild {
     public String build() {
         return output;
     }
+    
+    public StackApp makeStack () {
+    	int l = output.length();
+    	System.out.println(l + "\n");
+    	stack = new StackApp(l);
+    	for (int i = 0; i < l; i++) {
+    		stack.push(output.charAt(i));
+    	}
+    	stack.display();
+    	return stack;
+    }
+    
+    static class Evaluate
+    {
+    	public void Evaluater() {
+    		System.out.println("\nInside Evaluater\n");
+    	}
+    	
+    	public static PostfixBuild builder(String s) {
+    		PostfixBuild p = new PostfixBuild(s).builder();
+    		StackApp stack = p.makeStack();
+    		return p;
+    	}
+    }
 }
 
 public class PostfixBuilder {
     public static void main(String[] args) {
-        PostfixBuild p = new PostfixBuild("(a+(b/C)*d)");
+        /*PostfixBuild p = new PostfixBuild("(a+b)/c");
         String s = p.builder().build();
+        System.out.println("\n" + s + "\n");*/
+	    String s = PostfixBuild.Evaluate.builder("5/2+1/3").build();
         System.out.println("\n" + s + "\n");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
