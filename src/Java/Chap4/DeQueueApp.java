@@ -1,5 +1,3 @@
-package Java.Chap4;
-
 class DeQueue {
     private char[] arr;
     private int left;
@@ -16,7 +14,7 @@ class DeQueue {
     }
 
     boolean isFull() {
-        return (nItems == maxSize - 1);
+        return (nItems == maxSize);
     }
 
     boolean isEmpty() {
