@@ -1,6 +1,6 @@
 class PostfixBuild {
     private String input;
-    private String output;
+    private static String output;
     private StackApp stack;
     private int length;
 
@@ -88,26 +88,49 @@ class PostfixBuild {
         return output;
     }
     
-    public StackApp makeStack () {
+    private StackApp makeStack () {
     	int l = output.length();
-    	System.out.println(l + "\n");
     	stack = new StackApp(l);
     	for (int i = 0; i < l; i++) {
-    		stack.push(output.charAt(i));
+    		if (output.charAt(i) >= '0' && output.charAt(i) <= '9')
+    		{
+    			stack.push(output.charAt(i));
+    		} else {
+    			char c = stack.pop();
+    			char c2 = stack.pop();
+    			int t1 = Integer.parseInt(c + "");
+    			int t2 = Integer.parseInt(c2 + "");
+    			int ans = 0;
+    			switch (output.charAt(i))
+    			{
+    				case '+' : 
+    					ans = t2 + t1;
+	    				break;
+	    			case '*' :
+    					ans = t2 * t1;
+	    				break;
+	    			case '/' :
+    					ans = t2 / t1;
+	    				break;
+	    			case '-' :
+    					ans = t2 - t1;
+	    				break;
+	    			default:
+	    				ans = 0;
+	    				break;
+    			};
+    			char c3 = (char)(ans + '0');
+    			stack.push(c3);
+    		}
     	}
-    	stack.display();
     	return stack;
     }
     
     static class Evaluate
-    {
-    	public void Evaluater() {
-    		System.out.println("\nInside Evaluater\n");
-    	}
-    	
+    {	
     	public static PostfixBuild builder(String s) {
     		PostfixBuild p = new PostfixBuild(s).builder();
-    		StackApp stack = p.makeStack();
+    		output = p.makeStack().peek() + "";
     		return p;
     	}
     }
@@ -118,9 +141,7 @@ public class PostfixBuilder {
         /*PostfixBuild p = new PostfixBuild("(a+b)/c");
         String s = p.builder().build();
         System.out.println("\n" + s + "\n");*/
-	    String s = PostfixBuild.Evaluate.builder("5/2+1/3").build();
+	String s = PostfixBuild.Evaluate.builder("3+3-2").build();
         System.out.println("\n" + s + "\n");
     }
 }
-
-
