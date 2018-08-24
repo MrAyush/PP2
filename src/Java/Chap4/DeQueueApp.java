@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class DeQueue {
     private char[] arr;
     private int left;
@@ -8,6 +10,7 @@ class DeQueue {
     DeQueue(int s) {
         maxSize = s;
         arr = new char[maxSize];
+        Arrays.fill(arr, ' ');
         nItems = 0;
         left = 0;
         right = 0;
