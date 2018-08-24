@@ -38,14 +38,17 @@ class DeQueue {
             System.out.println("\nNothing to delete.\n");
         }
         nItems--;
-        return arr[left++];
+        char c = arr[left];
+        arr[left] = ' ';
+        left++;
+        return c;
     }
 
     void insertRight(char c) {
         if (isFull()) {
             System.out.println("\nQueue is full.\n");
         } else {
-            if (right > maxSize - 1)
+            if (right > maxSize)
                 right = 0;
             arr[right++] = c;
             nItems++;
@@ -57,7 +60,10 @@ class DeQueue {
             System.out.println("\nNothing to delete.\n");
         }
         nItems--;
-        return arr[--right];
+        right--;
+        char c = arr[right];
+        arr[right] = ' ';
+        return arr[right];
     }
 
     char peekRight() {
@@ -69,8 +75,9 @@ class DeQueue {
     }
 
     void display() {
-        for (int i = 0; i < nItems; i++) {
-            System.out.println(arr[i]);
+        for (int i = 0; i < maxSize; i++) {
+            if (arr[i] != ' ')
+            	System.out.println(arr[i]);
         }
     }
 }
@@ -80,12 +87,9 @@ public class DeQueueApp {
         DeQueue d = new DeQueue(10);
         d.insertRight('1');
         d.insertRight('2');
-        d.insertRight('3');
-        d.insertRight('4');
+        d.insertLeft('6');
         d.removeRight();
         d.removeRight();
-        d.removeRight();
-        d.insertRight('5');
         d.display();
     }
 }
