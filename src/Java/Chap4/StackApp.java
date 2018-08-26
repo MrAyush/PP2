@@ -1,5 +1,3 @@
-package Java.Chap4;
-
 class StackApp {
     private DeQueue deQueue;
 
