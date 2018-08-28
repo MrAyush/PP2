@@ -25,8 +25,8 @@ class Supermarket {
                 if (isQueueFull(i)) {
                     System.out.println("Queue " + i + 1 + " is full!!");
                 } else {
-                    if (queueItems > queue[i].getItemSum()) {
-                        queueItems = queue[i].getItemSum();
+                    if (queueItems > queue[i].getnItems()) {
+                        queueItems = queue[i].getnItems();
                         fastQueue = i;
                     }
                 }

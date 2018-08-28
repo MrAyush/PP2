@@ -62,9 +62,13 @@ class Queue {
             if (f == maxSize)
                 f = 0;
             n--;
-            temp += (int)t;
+            temp += (int) t;
         }
         return temp;
+    }
+
+    public int getnItems() {
+        return nItems;
     }
 
     //--------------------------------------------------------------
