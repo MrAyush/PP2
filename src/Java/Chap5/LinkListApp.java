@@ -1,7 +1,7 @@
 class LinkBeans {
     // Members variable
-    int iData;
-    double dData;
+    private int iData;
+    private double dData;
 
     // Constructor
     LinkBeans() {
@@ -117,14 +117,38 @@ class LinkList {
     void deleteLast() {
         if (isEmpty()) {
             System.out.println("List is empty");
-        } else if (first.next == null) {
+        } else if (first.isEmpty()) {
             deleteFirst();
         } else {
             Link temp = first;
-            while (temp.next.next != null) {
+            while (!temp.next.isEmpty()) {
                 temp = temp.next;
             }
             temp.next = null;
+        }
+    }
+
+    void insertAt(int pos, int iData, double dData) {
+        int i = 1;
+        if (isEmpty() && pos != 1) {
+            System.out.println("List is empty");
+        } else {
+            Link node = new Link(iData, dData);
+            Link temp = first;
+            Link pTemp = first;
+            while (i < pos) {
+                if (temp.isEmpty()) {
+                    System.out.println("Link is not that big, Adding the value to the last of list.");
+                    pTemp = temp;
+                    temp = null;
+                    break;
+                }
+                pTemp = temp;
+                temp = temp.next;
+                i++;
+            }
+            node.next = temp;
+            pTemp.next = node;
         }
     }
 
@@ -132,7 +156,7 @@ class LinkList {
         Link temp = first;
 
         while (!temp.checkByInt(iData)) {
-            if (temp.next == null) {
+            if (temp.isEmpty()) {
                 System.out.println("Element not found!! (~_~)");
                 return null;
             } else {
@@ -148,7 +172,7 @@ class LinkList {
         Link temp = first;
 
         while (!temp.checkByDouble(dData)) {
-            if (temp.next == null) {
+            if (temp.isEmpty()) {
                 System.out.println("Element not found!! (~_~)");
                 return null;
             } else {
@@ -161,6 +185,7 @@ class LinkList {
     }
 
     boolean deleteByInt(int iData) {
+        System.out.println("Finding...");
         Link temp = findByInt(iData);
         Link pTemp = first;
         if (temp != null) {
@@ -168,6 +193,7 @@ class LinkList {
                 pTemp = pTemp.next;
             }
             pTemp.next = temp.next;
+            System.out.println("Deleted");
             return true;
         } else {
             System.out.println("Element not found!! (~_~)");
@@ -176,6 +202,7 @@ class LinkList {
     }
 
     boolean deleteByDouble(double dData) {
+        System.out.println("Finding...");
         Link temp = findByDouble(dData);
         Link pTemp = first;
         if (temp != null) {
@@ -183,6 +210,7 @@ class LinkList {
                 pTemp = pTemp.next;
             }
             pTemp.next = temp.next;
+            System.out.println("Deleted");
             return true;
         } else {
             System.out.println("Element not found!! (~_~)");
@@ -208,6 +236,8 @@ public class LinkListApp {
         list.insertFirst(4, 4.4);
         list.insertLast(5, 5.5);
         list.insertLast(6, 6.6);
+        list.insertAt(6, 7, 7.7);
+        list.deleteLast();
 
         list.display();
         list.findByInt(1);
