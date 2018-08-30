@@ -55,6 +55,14 @@ class Link {
         System.out.println("(Int - '" + beans.getIData() + "', Double - '" + beans.getDData() + "')");
     }
 
+    void displayInt() {
+        System.out.println(" " + beans.getIData() + " ");
+    }
+
+    void displayDouble() {
+        System.out.println(" " + beans.getDData() + " ");
+    }
+
     void setIData(int iData) {
         beans.setIData(iData);
     }
@@ -83,11 +91,15 @@ class Link {
 class LinkList {
     private Link first;
 
+    public Link getFirst() {
+        return first;
+    }
+
     LinkList() {
         first = null;
     }
 
-    private boolean isEmpty() {
+    boolean isEmpty() {
         return first == null;
     }
 
@@ -97,8 +109,13 @@ class LinkList {
         first = newNode;
     }
 
-    void deleteFirst() {
-        first = first.next;
+    Link deleteFirst() {
+        Link temp = first;
+        if (!isEmpty())
+            first = first.next;
+        else
+            return null;
+        return temp;
     }
 
     void insertLast(int iData, double dData) {
@@ -222,6 +239,22 @@ class LinkList {
         Link temp = first;
         while (temp != null) {
             temp.display();
+            temp = temp.next;
+        }
+    }
+
+    void displayInts() {
+        Link temp = first;
+        while (temp != null) {
+            temp.displayInt();
+            temp = temp.next;
+        }
+    }
+
+    void displayDoubles() {
+        Link temp = first;
+        while (temp != null) {
+            temp.displayDouble();
             temp = temp.next;
         }
     }
