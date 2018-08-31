@@ -7,8 +7,12 @@ class DoubleLinkList {
         last = null;
     }
 
-    private boolean isEmpty() {
+    boolean isEmpty() {
         return first == null;
+    }
+    
+    Link getLast() {
+    	return last;
     }
 
     void insertFirst(int iData, double dData) {
@@ -20,11 +24,13 @@ class DoubleLinkList {
         first = newNode;
     }
 
-    void deleteFirst() {
+    Link deleteFirst() {
+        Link temp = first;
         first = first.next;
         if (isEmpty()) {
             last = null;
         }
+        return temp;
     }
 
     void insertLast(int iData, double dData) {
@@ -163,6 +169,22 @@ class DoubleLinkList {
             temp.display();
             temp = temp.next;
         }
+    }
+    
+    void displayInts() {
+    	Link temp = first;
+    	while (temp != last.next) {
+    	    temp.displayInt();
+    	    temp = temp.next;
+    	}
+    }
+    
+    void displayDoubles() {
+    	Link temp = first;
+    	while (temp != last.next) {
+    	    temp.displayDouble();
+    	    temp = temp.next;
+    	}
     }
 }
 
