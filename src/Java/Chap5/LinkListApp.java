@@ -234,6 +234,30 @@ class LinkList {
             return false;
         }
     }
+    
+    LinkList reverse() {
+    	if (isEmpty()) {
+    		System.out.println("List is empty!! (-_-)");
+    		return null;
+    	} else if (first.isEmpty()) {
+    		System.out.println("List contains only one element");
+    	} else {
+    		Link t1 = first;
+    		Link t2 = first.next;
+    		Link t3 = first.next.next;
+    		
+    		while (t3 != null) {
+    			t2.next = t1;
+    			t1 = t2;
+    			t2 = t3;
+    			t3 = t3.next;
+    		}
+    		t2.next = t1;
+    		first.next = null;
+    		first = t2;
+    	}
+    	return this;
+    }
 
     void display() {
         Link temp = first;
@@ -267,13 +291,14 @@ public class LinkListApp {
         list.insertFirst(2, 2.2);
         list.insertFirst(3, 3.3);
         list.insertFirst(4, 4.4);
-        list.insertLast(5, 5.5);
-        list.insertLast(6, 6.6);
-        list.insertAt(6, 7, 7.7);
-        list.deleteLast();
+        //list.insertLast(5, 5.5);
+        //list.insertLast(6, 6.6);
+        //list.insertAt(6, 7, 7.7);
+        //list.deleteLast();
 
         list.display();
-        list.findByInt(1);
+        list.reverse().display();
+        /*list.findByInt(1);
         list.findByDouble(2.2);
         list.findByDouble(2.3);
         list.findByInt(9);
@@ -283,6 +308,6 @@ public class LinkListApp {
         list.deleteByInt(1);
         list.deleteByDouble(2.2);
         list.deleteLast();
-        list.display();
+        list.display();*/
     }
 }
