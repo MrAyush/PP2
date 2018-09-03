@@ -258,6 +258,60 @@ class LinkList {
     	}
     	return this;
     }
+    
+    LinkList sortByInt() {
+    	if (isEmpty()) {
+    		System.out.println("List is empty!! (-_-)");
+    		return null;
+    	} else if (first.isEmpty()) {
+    		System.out.println("List contains only one element");
+    	} else {
+    		Link t1 = first;
+    		while (t1 != null) {
+    			Link t2 = t1.next;
+    			while (t2 != null) {
+    				if (t2.getIData() <= t1.getIData()) {
+    					int t = t2.getIData();
+    					double dT = t2.getDData();
+    					t2.setIData(t1.getIData());
+    					t2.setDData(t1.getDData());
+    					t1.setIData(t);
+    					t1.setDData(dT);
+    				}
+    				t2 = t2.next;
+    			}
+    			t1 = t1.next;
+    		}
+    	}
+    	return this;
+    }
+    
+    LinkList sortByDouble() {
+    	if (isEmpty()) {
+    		System.out.println("List is empty!! (-_-)");
+    		return null;
+    	} else if (first.isEmpty()) {
+    		System.out.println("List contains only one element");
+    	} else {
+    		Link t1 = first;
+    		while (t1 != null) {
+    			Link t2 = t1.next;
+    			while (t2 != null) {
+    				if (t2.getDData() <= t1.getDData()) {
+    					int t = t2.getIData();
+    					double dT = t2.getDData();
+    					t2.setIData(t1.getIData());
+    					t2.setDData(t1.getDData());
+    					t1.setIData(t);
+    					t1.setDData(dT);
+    				}
+    				t2 = t2.next;
+    			}
+    			t1 = t1.next;
+    		}
+    	}
+    	return this;
+    }
 
     void display() {
         Link temp = first;
@@ -291,13 +345,13 @@ public class LinkListApp {
         list.insertFirst(2, 2.2);
         list.insertFirst(3, 3.3);
         list.insertFirst(4, 4.4);
-        //list.insertLast(5, 5.5);
-        //list.insertLast(6, 6.6);
-        //list.insertAt(6, 7, 7.7);
-        //list.deleteLast();
-
-        list.display();
-        list.reverse().display();
+        list.insertLast(5, 5.5);
+        list.insertLast(6, 6.6);
+        list.insertAt(6, 7, 7.7);
+        list.deleteLast();
+		list.display();
+		list.sortByDouble().display();
+        //list.reverse().display();
         /*list.findByInt(1);
         list.findByDouble(2.2);
         list.findByDouble(2.3);
