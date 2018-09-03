@@ -162,6 +162,85 @@ class DoubleLinkList {
             return false;
         }
     }
+    
+    DoubleLinkList reverse() {
+    	if (isEmpty()) {
+    		System.out.println("List is empty!! (-_-)");
+    		return null;
+    	} else if (first.isEmpty()) {
+    		System.out.println("List contains only one element");
+    	} else {
+    		Link t1 = first;
+    		Link t2 = first.next;
+    		Link t3 = first.next.next;
+    		
+    		while (t3 != null) {
+    			t2.next = t1;
+    			t1 = t2;
+    			t2 = t3;
+    			t3 = t3.next;
+    		}
+    		t2.next = t1;
+    		first.next = null;
+    		last = first;
+    		first = t2;
+    	}
+    	return this;
+    }
+    
+    DoubleLinkList sortByInt() {
+    	if (isEmpty()) {
+    		System.out.println("List is empty!! (-_-)");
+    		return null;
+    	} else if (first.isEmpty()) {
+    		System.out.println("List contains only one element");
+    	} else {
+    		Link t1 = first;
+    		while (t1 != null) {
+    			Link t2 = t1.next;
+    			while (t2 != null) {
+    				if (t2.getIData() <= t1.getIData()) {
+    					int t = t2.getIData();
+    					double dT = t2.getDData();
+    					t2.setIData(t1.getIData());
+    					t2.setDData(t1.getDData());
+    					t1.setIData(t);
+    					t1.setDData(dT);
+    				}
+    				t2 = t2.next;
+    			}
+    			t1 = t1.next;
+    		}
+    	}
+    	return this;
+    }
+    
+    DoubleLinkList sortByDouble() {
+    	if (isEmpty()) {
+    		System.out.println("List is empty!! (-_-)");
+    		return null;
+    	} else if (first.isEmpty()) {
+    		System.out.println("List contains only one element");
+    	} else {
+    		Link t1 = first;
+    		while (t1 != null) {
+    			Link t2 = t1.next;
+    			while (t2 != null) {
+    				if (t2.getDData() <= t1.getDData()) {
+    					int t = t2.getIData();
+    					double dT = t2.getDData();
+    					t2.setIData(t1.getIData());
+    					t2.setDData(t1.getDData());
+    					t1.setIData(t);
+    					t1.setDData(dT);
+    				}
+    				t2 = t2.next;
+    			}
+    			t1 = t1.next;
+    		}
+    	}
+    	return this;
+    }
 
     void display() {
         Link temp = first;
@@ -201,6 +280,8 @@ public class DoubleEndedListApp {
         list.deleteLast();
 
         list.display();
+        list.reverse().display();
+        //list.sortByDouble().display();
         list.findByInt(1);
         list.findByDouble(2.2);
         list.findByDouble(2.3);
