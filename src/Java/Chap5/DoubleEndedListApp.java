@@ -11,6 +11,10 @@ class DoubleLinkList {
         return first == null;
     }
     
+    Link getFirst() {
+    	return first;
+    }
+    
     Link getLast() {
     	return last;
     }
@@ -243,26 +247,38 @@ class DoubleLinkList {
     }
 
     void display() {
-        Link temp = first;
-        while (temp != last.next) {
-            temp.display();
-            temp = temp.next;
-        }
+	    if (!isEmpty()) {
+    	    Link temp = first;
+    	    while (temp != last.next) {
+    	        temp.display();
+    	        temp = temp.next;
+    	    }
+    	} else {
+    		System.out.println("List is Empty");
+    	}
     }
     
     void displayInts() {
-    	Link temp = first;
-    	while (temp != last.next) {
-    	    temp.displayInt();
-    	    temp = temp.next;
+    	if (!isEmpty()) {
+    	    Link temp = first;
+    	    while (temp != last.next) {
+    	        temp.displayInt();
+    	        temp = temp.next;
+    	    }
+    	} else {
+    		System.out.println("List is Empty");
     	}
     }
     
     void displayDoubles() {
-    	Link temp = first;
-    	while (temp != last.next) {
-    	    temp.displayDouble();
-    	    temp = temp.next;
+		if (!isEmpty()) {
+	   	    Link temp = first;
+    	    while (temp != last.next) {
+    	        temp.displayDouble();
+    	        temp = temp.next;
+    	    }
+    	} else {
+    		System.out.println("List is Empty");
     	}
     }
 }
