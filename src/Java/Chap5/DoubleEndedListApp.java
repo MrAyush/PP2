@@ -48,18 +48,21 @@ class DoubleLinkList {
         }
     }
 
-    void deleteLast() {
+    Link deleteLast() {
         if (isEmpty()) {
             System.out.println("List is empty");
+            return null;
         } else if (first.isEmpty()) {
-            deleteFirst();
+            return deleteFirst();
         } else {
             Link temp = first;
             while (!temp.next.isEmpty()) {
                 temp = temp.next;
             }
+            Link t = temp.next;
             temp.next = null;
             last = temp;
+            return t;
         }
     }
 
