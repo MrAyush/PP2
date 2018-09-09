@@ -1,15 +1,15 @@
-class DeQueue
+class DeQueue5
 {
 	public final static String INT = "int";
 	public final static String DOUBLE = "double";
 	private DoubleLinkList list;
 	private boolean isInt;
 	
-	DeQueue() {
+	DeQueue5() {
 		this(INT);
 	}
 	
-	DeQueue(String type) {
+	DeQueue5(String type) {
 		isInt = type.equals(INT);
 		list = new DoubleLinkList();
 	}
@@ -80,10 +80,10 @@ class DeQueue
 	
 }
 
-class DeQueueApp
+class DeQueueApp5
 {
 	public static void main(String[] args) {
-		DeQueue d = new DeQueue();
+		DeQueue5 d = new DeQueue5();
 		d.insertFirst(2);
 		d.insertFirst(3);
 		d.insertFirst(4);
