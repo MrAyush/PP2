@@ -9,6 +9,10 @@ class CircularCurrent {
         return current == null;
     }
 
+    CircularLink getCurrent() {
+        return current;
+    }
+
     void insertLeft(int iData, double dData) {
         if (isEmpty()) {
             current = new CircularLink(iData, dData);
@@ -78,6 +82,22 @@ class CircularCurrent {
         while (temp != null) {
             temp.display();
             temp = temp.next;
+        }
+    }
+
+    void displayInts() {
+        CircularLink temp = current;
+        while (temp != null) {
+            temp.displayInt();
+            temp = temp.previous;
+        }
+    }
+
+    void displayDoubles() {
+        CircularLink temp = current;
+        while (temp != null) {
+            temp.displayDouble();
+            temp = temp.previous;
         }
     }
 
