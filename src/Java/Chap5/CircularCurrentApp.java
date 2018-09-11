@@ -51,17 +51,38 @@ class CircularCurrent {
         }
     }
 
+    boolean moveLeft() {
+        if (current.previous != null) {
+            current = current.previous;
+            return true;
+        }
+        return false;
+    }
+
+    boolean moveRight() {
+        if (current.next != null) {
+            current = current.next;
+            return true;
+        }
+        return false;
+    }
+
     CircularLink delete() {
         if (isEmpty())
             return null;
-        else {
+        else if (current.next == null && current.previous == null) {
+            CircularLink temp = current;
+            current = null;
+            return temp;
+        } else {
             CircularLink temp = current;
             if (current.previous == null) {
                 current = current.next;
                 current.previous = null;
-            } else if (current.next == null){
+            } else if (current.next == null) {
                 current = current.previous;
                 current.next = null;
+                reset();
             } else {
                 current.previous.next = current.next;
                 current.next.previous = current.previous;
@@ -89,7 +110,7 @@ class CircularCurrent {
         CircularLink temp = current;
         while (temp != null) {
             temp.displayInt();
-            temp = temp.previous;
+            temp = temp.next;
         }
     }
 
@@ -106,14 +127,14 @@ class CircularCurrent {
             return null;
         else {
             CircularLink temp = current;
-            while(!temp.checkByInt(iData)) {
+            while (!temp.checkByInt(iData)) {
                 temp = temp.next;
                 if (temp == null)
                     break;
             }
             if (temp == null) {
                 temp = current;
-                while(!temp.checkByInt(iData)) {
+                while (!temp.checkByInt(iData)) {
                     temp = temp.previous;
                     if (temp == null)
                         break;
@@ -128,14 +149,14 @@ class CircularCurrent {
             return null;
         else {
             CircularLink temp = current;
-            while(!temp.checkByDouble(dData)) {
+            while (!temp.checkByDouble(dData)) {
                 temp = temp.next;
                 if (temp == null)
                     break;
             }
             if (temp == null) {
                 temp = current;
-                while(!temp.checkByDouble(dData)) {
+                while (!temp.checkByDouble(dData)) {
                     temp = temp.previous;
                     if (temp == null)
                         break;
@@ -150,6 +171,7 @@ class CircularCurrentApp {
     public static void main(String[] args) {
         CircularCurrent link = new CircularCurrent();
         link.insertRight(1, 1.1);
+        link.delete();
         link.insertRight(6, 6.6);
         link.insertRight(2, 2.2);
         link.insertRight(3, 3.3);
