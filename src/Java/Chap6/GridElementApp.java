@@ -2,7 +2,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class GridElementApp {
-	final static int MAX = 10;
 	static HashMap<Character, Integer> getGridVar(char arr[][], HashMap<Character, Integer> m, int size) {
 		if (size > 0) {
 			int i = arr[0].length - 1;
@@ -10,7 +9,6 @@ public class GridElementApp {
 				if (!m.containsKey(arr[i][size - 1])) {
 					m.put(arr[i][size - 1], 0);
 				}
-				System.out.println(i + " " + size);
 				m.put(arr[i][size - 1], m.get(arr[i][size - 1]) + 1);
 				i--;
 			}
@@ -19,11 +17,10 @@ public class GridElementApp {
 		return m;
 	}
 	public static void main(String[] args) {
-		char arr[][] = {{'0', '0', ' '}, {'n', '0', ' '}, {' ', 'n', 'n'}};
+		char arr[][] = {{'0', '1', ' '}, {'2', '3', '5'}, {'5', '6', '0'}};
 		HashMap<Character, Integer> m = getGridVar(arr, new HashMap<Character, Integer>(), 3);
-		System.out.println(m); 
-		/*for (Map.Entry e : m.entrySet()) {
-			System.out.println(m.getKey()+" "+m.getValue()); 
-		}*/
+		for (Map.Entry e : m.entrySet()) {
+			System.out.println("'" + e.getKey() + "'" + "->" + e.getValue()); 
+		}
 	}
 }
