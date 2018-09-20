@@ -4,7 +4,7 @@ import java.util.List;
 class Anagram {
     private char[] str;
     private int size;
-    int count;
+    private int count;
     private List<String> anagramList;
 
     Anagram(String string) {
@@ -43,11 +43,20 @@ class Anagram {
         count++;
         anagramList.add(String.valueOf(str));
     }
+    
+    int getCount() {
+    	return this.count;
+    }
+    
+    String anagramAt(int x) {
+    	return anagramList.get(x + 1);
+    }
 }
 
 public class AnagramApp {
     public static void main(String[] args) {
-        Anagram anagram = new Anagram("CAT").doAnagram(3);
+        Anagram anagram = new Anagram("123").doAnagram(3);
+        System.out.println("Count : " + anagram.getCount());
         List<String> list = anagram.getAnagramList();
         for (String l : list) {
             System.out.println(l);
