@@ -36,6 +36,9 @@ class BNode {
 
 class BTree {
 	private BNode root;
+	public static final String IN_ORDER = "inorder";
+	public static final String POST_ORDER = "postorder";
+	public static final String PRE_ORDER = "preorder";
 	
 	BTree() {
 		root = null;
@@ -187,15 +190,42 @@ class BTree {
 	}
 	
 	void display() {
-		display(root);
+		display(IN_ORDER);
 	}
 	
-	private void display(BNode root) {
+	private void displayIn(BNode root) {
 		if (root != null) {
-			display(root.getLeft());
+			displayIn(root.getLeft());
 			System.out.println(root.getIData());
-			display(root.getRight());
+			displayIn(root.getRight());
 		}
+	}
+	
+	private void displayPre(BNode root) {
+		if (root != null) {
+			System.out.println(root.getIData());
+			displayPre(root.getLeft());
+			displayPre(root.getRight());
+		}
+	}
+	
+	private void displayPost(BNode root) {
+		if (root != null) {
+			displayPost(root.getLeft());
+			displayPost(root.getRight());
+			System.out.println(root.getIData());
+		}
+	}
+	
+	void display(String order) {
+		if (order == IN_ORDER)
+			displayIn(root);
+		else if (order == POST_ORDER)
+			displayPost(root);
+		else if (order == PRE_ORDER)
+			displayPre(root);
+		else
+			System.out.println("Error");
 	}
 }
 
@@ -206,7 +236,7 @@ public class BinaryTree {
 		/*tree.find(30);
 		tree.findMax();
 		tree.findMin();*/
-		tree.delete(10).display();
+		//tree.delete(10).display();
 	}
 }
 
