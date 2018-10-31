@@ -1,5 +1,8 @@
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
 
 class Graph {
     private int vertexCount;    // vCount
@@ -36,7 +39,7 @@ class Graph {
 
     // checks if there exists a edge B/W u and v
     public boolean hasEdge(int u, int v) {
-        return (graph[u][v] != 0);
+        return (graph[u][v] == 1);
     }
 
     // returns all the neighbours of the given vertex by traversing
@@ -59,10 +62,30 @@ class Graph {
             }
         }
     }
+	
+	public void bfs() {
+		boolean isVisited[] = new boolean[vertexCount];
+		Arrays.fill(isVisited, false);
+		Queue<Integer> q = new LinkedList<>();
+		q.add(0);
+		isVisited[0] = true;
+		System.out.println("Found : " + 0);
+		while (!q.isEmpty()) {
+			int v1 = q.poll();
+			List<Integer> connection = neighbours(v1);
+			for (Integer v2 : connection) {
+				if (!isVisited[v2]) {
+					q.add(v2);
+					isVisited[v2] = true;
+					System.out.println("Found : " + v2);
+				}
+			}
+		}
+	}
 }
 public class GraphApp {
 	public static void main(String[] args) {
-		Graph graph = new Graph(5);
+		Graph graph = new Graph(10);
 		graph.addEdge(0,1);
 		graph.addEdge(0,3);
 		graph.addEdge(1,0);
@@ -75,5 +98,6 @@ public class GraphApp {
 		graph.addEdge(4,1);
 		graph.addEdge(4,2);
 		graph.printGraph();
+		graph.bfs();
 	}
 }
