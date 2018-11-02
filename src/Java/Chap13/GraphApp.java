@@ -17,6 +17,10 @@ class Graph {
     public int[][] getGraph() {
         return graph;
     }
+    
+    public void setGraph(int[][] graph) {
+    	this.graph = graph;
+    }
 
     // creates a graph with weight of 0
     public Graph(int vertexCount) {
@@ -101,6 +105,48 @@ class Graph {
             }
         }
     }
+    
+    Graph mst() {
+    	int[][] graph = this.graph;
+    	int[] key = new int[vertexCount];
+    	int[] parent = new int [vertexCount];
+    	boolean[] isVisited = new boolean[vertexCount];
+    	Arrays.fill(key, Integer.MAX_VALUE);
+    	Arrays.fill(isVisited, false);
+    	
+    	key[0] = 0;
+    	parent[0] = -1;
+    	
+    	for (int i = 0; i < vertexCount - 1; i++) {
+    		int u = findMinKey(key, isVisited);
+			isVisited[u] = true;
+			for (int v = 0; v < vertexCount; v++) {
+				if (hasEdge(u, v) && !isVisited[v] && graph[u][v] < key[v]) {
+					parent[v] = u;
+					key[v] = graph[u][v];
+				}
+			}
+    	}
+    	Graph g = new Graph(vertexCount);
+    	System.out.println("Edge \tWeight");
+    	for (int i = 1; i < vertexCount; i++) {
+    		g.addEdge(parent[i], i);
+    		System.out.println(parent[i]+" - "+ i + "\t" + graph[i][parent[i]]);
+    	}
+    	return g;
+    }
+    
+    private int findMinKey(int[] key, boolean[] isVisited) {
+    	int min = -1, minV = Integer.MAX_VALUE;
+    	for (int v = 0; v < vertexCount; v++) {
+    		if (!isVisited[v] && key[v] < minV) {
+    			minV = key[v];
+    			min = v;
+    		}
+    	}
+    	return min;
+    }
+    
 }
 
 public class GraphApp {
@@ -118,10 +164,10 @@ public class GraphApp {
         graph.addEdge(4, 1);
         graph.addEdge(4, 2);
         System.out.println("Graph: ");
-        graph.printGraph();
-        System.out.println("Graph traversing (BFS): ");
+        graph.mst().printGraph();
+        /*System.out.println("Graph traversing (BFS): ");
         graph.bfs();
         System.out.println("Graph traversing (DFS): ");
-        graph.dfs();
+        graph.dfs();*/
     }
 }
